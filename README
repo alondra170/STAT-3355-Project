@@ -1,0 +1,2 @@
+I made each vector of jobs with its index. The name of vector is the job in lowercase with "_" for spaces
+ex) reserve_police_officer <- which(police.deaths$position == "Reserve Police Officer")
