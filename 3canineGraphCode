@@ -1,0 +1,8 @@
+canine_death <- which(police.deaths$canine == T)
+states_canine_death <- police.deaths$state[canine_death]
+
+scd <- table(states_canine_death)
+top5states <- scd[rev(order(scd))][1:5]
+
+barplot(top5states, main = "Top 5 causes of canine death in the police force in America for 
+        the top 5 deathliest States", xlab = "States", ylab = "Deaths")
