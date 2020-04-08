@@ -1,0 +1,34 @@
+# Pie graph of top 5 causes of canine death in America
+# making subsets 
+canine_death <- which(police.deaths$canine == T)
+cause_canine_death <- police.deaths$cause_short[canine_death]
+
+# make vector into data table
+ccd <- table(cause_canine_death)
+
+# make vector of top 5 deathiest states
+top5cause <- ccd[rev(order(ccd))][1:5]
+# find out the top 5 causes of death from this graph
+barplot(top5cause, main = "Top 5 causes of canine death", xlab = "States", ylab = "Deaths", cex.names = .8)
+
+# # of dogs that died by the top 5 causes
+gun <- length(which(police.deaths$cause_short[canine_death] == "Gunfire"))
+heat <- length(which(police.deaths$cause_short[canine_death] == "Heat exhaustion"))
+car <- length(which(police.deaths$cause_short[canine_death] == "Struck by vehicle"))
+stabbed <- length(which(police.deaths$cause_short[canine_death] == "Stabbed"))
+fall <- length(which(police.deaths$cause_short[canine_death] == "Fall"))
+
+# making the pie chart
+slices <- c(gun, heat, car, stabbed, fall)
+lbls <- c("Gunfire", "Heat exhaustion", "Stuck by vehicle", "Stabbed", "Fall")
+pct <- round(slices/sum(slices)*100)
+lbls <- paste(lbls, pct) # add percents to labels 
+lbls <- paste(lbls,"%",sep="") # ad % to labels 
+
+# getting nice colors
+install.packages("RColorBrewer")
+library(RColorBrewer)
+
+# pie chart
+pie(slices, labels = lbls, main = "Top 5 causes of canine death in the police force in America", 
+    col = brewer.pal(5,'Set3'), cex = 1.2)
