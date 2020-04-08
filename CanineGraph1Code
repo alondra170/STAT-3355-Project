@@ -32,3 +32,15 @@ library(RColorBrewer)
 # pie chart
 pie(slices, labels = lbls, main = "Top 5 causes of canine death in the police force in America", 
     col = brewer.pal(5,'Set3'), cex = 1.2)
+    
+# finds top 5 deadliest states
+# making subsets
+states_canine_death <- police.deaths$state[canine_death]
+scd <- table(states_canine_death)
+
+# finding top 5 deathliest states
+top5states <- scd[rev(order(scd))][1:5]
+# barlplot showing top 5 deathliest states
+barplot(top5states, main = "Top 5 deadliest states in America for canines", xlab = "States", ylab = "Deaths", col = brewer.pal(5,'Set3'))
+    
+
